@@ -3,10 +3,6 @@
 </script>
 
 <template>
-  <!-- 
-    Section "Tentang Kami" (WDD 4.1)
-    Menggunakan background putih
-  -->
   <section class="bg-white py-20 md:py-28 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -32,12 +28,13 @@
             Kami berkomitmen untuk membangun generasi muda yang melek investasi, profesional, dan berintegritas.
           </p>
           <div>
-            <a 
-              href="#" 
+            <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
+            <router-link 
+              to="/about" 
               class="inline-block bg-gibei-primary text-white font-poppins font-semibold px-8 py-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
             >
               Pelajari Lebih Lanjut
-            </a>
+            </router-link>
           </div>
         </div>
         

@@ -6,10 +6,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- 
-    PERBAIKAN: Menambahkan duration-500 dan group-hover:shadow-xl
-    untuk micro-interaction yang lebih "elegan" (WDD 5.1)
-  -->
   <div 
     v-motion
     :initial="{ opacity: 0, y: 50 }"
@@ -27,27 +23,23 @@ defineProps({
 
     <!-- Konten Teks -->
     <div class="p-6 flex flex-col flex-grow">
-      <!-- Tanggal (Menggunakan warna sekunder untuk aksen) -->
       <span class="block text-gibei-primary font-inter font-semibold text-sm mb-2">{{ event.date }}</span>
-      
-      <!-- Judul Event -->
       <h3 class="font-poppins font-bold text-xl text-gibei-primary mb-3 leading-tight group-hover:text-blue-800 transition-colors duration-300">
         {{ event.title }}
       </h3>
-      
-      <!-- Deskripsi Singkat -->
-      <p classf="font-inter text-gibei-text text-base mb-6 flex-grow">
+      <p class="font-inter text-gibei-text text-base mb-6 flex-grow">
         {{ event.description }}
       </p>
 
       <!-- Tombol Daftar (CTA) -->
       <div class="mt-auto">
-        <a 
-          :href="event.link"
+        <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
+        <router-link 
+          :to="event.link"
           class="inline-block bg-gibei-primary text-white font-poppins font-medium px-6 py-2 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105 hover:bg-blue-900"
         >
           Daftar Sekarang
-        </a>
+        </router-link>
       </div>
     </div>
   </div>

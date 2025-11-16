@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 import ArticleCard from './ArticleCard.vue'
 
-// Data placeholder untuk artikel (nanti dari API/CMS)
+// Data placeholder...
 const dummyArticles = ref([
   {
     id: 1,
     title: 'Apa itu Reksadana? Panduan Lengkap untuk Pemula',
     category: 'Dasar Investasi',
     imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Reksadana',
-    link: '#',
+    link: '/artikel', // PENYEMPURNAAN: Arahkan ke halaman Artikel
     delay: 100,
   },
   {
@@ -17,25 +17,21 @@ const dummyArticles = ref([
     title: 'Memahami Risiko dan Imbal Hasil dalam Investasi Saham',
     category: 'Analisis',
     imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Risiko+Saham',
-    link: '#',
+    link: '/artikel', // PENYEMPURNAAN: Arahkan ke halaman Artikel
     delay: 200,
   },
   {
     id: 3,
-    title: 'Diversifikasi Portofolio: Mengapa Anda Tidak Boleh Menaruh Semua Telur...',
+    title: 'Diversifikasi Portofolio: Mengapa Anda Tidak Boleh Menaruh...',
     category: 'Tips & Trik',
     imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Diversifikasi',
-    link: '#',
+    link: '/artikel', // PENYEMPURNAAN: Arahkan ke halaman Artikel
     delay: 300,
   },
 ])
 </script>
 
 <template>
-  <!-- 
-    Section "Artikel Terbaru" (WDD 4.1)
-    Menggunakan background sekunder (krim) untuk variasi visual
-  -->
   <section class="bg-gibei-secondary py-20 md:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -70,12 +66,13 @@ const dummyArticles = ref([
         :visibleOnce="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 400 } }"
         class="text-center mt-16"
       >
-        <a 
-          href="#"
+        <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
+        <router-link 
+          to="/artikel"
           class="inline-block bg-gibei-primary text-white font-poppins font-semibold px-8 py-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
         >
           Lihat Semua Artikel
-        </a>
+        </router-link>
       </div>
 
     </div>

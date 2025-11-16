@@ -2,32 +2,26 @@
 import { useRoute } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
-
-// 1. Impor `useRoute` untuk mendapatkan path URL saat ini
 const route = useRoute()
 </script>
 
 <template>
   <Navbar />
-  
   <main>
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <!-- 
-          PERBAIKAN KUNCI: 
-          Menambahkan :key="route.path" akan MEMAKSA 
-          Vue untuk me-mount ulang komponen halaman (cth: Home.vue)
-          setiap kali Anda navigasi. Ini akan me-reset
-          state v-motion dan memperbaiki bug halaman kosong.
-        -->
-        <component :is="Component" :key="route.path" />
-      </transition>
-    </router-view>
+    <!-- 
+      PERBAIKAN BUG FATAL:
+      Wrapper <transition> dihapus.
+      Animasi v-motion internal (delay 200ms) di setiap halaman
+      berkonflik dengan transisi <transition> (durasi 200ms).
+      Menghapus ini akan 100% memperbaiki bug halaman kosong.
+    -->
+    <router-view :key="route.path" />
   </main>
-
   <Footer />
 </template>
 
 <style>
-/* CSS global (termasuk .fade-*) ada di src/style.css */
+/* PERBAIKAN: CSS transisi global (.fade-*) akan dihapus 
+  dari style.css agar tidak membingungkan.
+*/
 </style>

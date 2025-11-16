@@ -6,10 +6,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- 
-    PERBAIKAN: Menambahkan duration-500 dan group-hover:shadow-xl
-    untuk micro-interaction yang lebih "elegan" (WDD 5.1)
-  -->
   <div 
     v-motion
     :initial="{ opacity: 0, y: 50 }"
@@ -38,8 +34,10 @@ defineProps({
       
       <!-- Link "Baca Selengkapnya" -->
       <div class="mt-auto">
-        <a 
-          :href="article.link"
+        <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
+        <!-- (Kita asumsikan link artikel internal, jika eksternal ganti kembali ke <a>) -->
+        <router-link 
+          :to="article.link"
           class="inline-flex items-center font-inter font-semibold text-gibei-primary group-hover:underline"
         >
           Baca Selengkapnya
@@ -47,7 +45,7 @@ defineProps({
           <svg class="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>

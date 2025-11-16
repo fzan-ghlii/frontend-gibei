@@ -45,6 +45,7 @@ const navLinks = [
 
         <!-- Tombol Login (Kanan, Desktop) - (WDD 4.4) -->
         <div class="hidden md:block">
+          <!-- PERBAIKAN: Menggunakan <router-link> alih-alih <a> -->
           <router-link
             to="/login"
             class="bg-white text-gibei-primary font-poppins font-semibold px-5 py-2 rounded-full text-sm hover:bg-gibei-secondary transition-colors duration-300 transform hover:scale-105"
@@ -96,6 +97,7 @@ const navLinks = [
           </li>
           <!-- Tombol Login (Mobile) -->
           <li>
+            <!-- PERBAIKAN: Menggunakan <router-link> alih-alih <a> -->
             <router-link
               to="/login"
               class="bg-gibei-secondary text-gibei-primary block px-3 py-3 rounded-md text-base font-poppins font-semibold transition-colors mt-3 text-center"

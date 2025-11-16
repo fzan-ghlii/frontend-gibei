@@ -16,15 +16,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #1a4162; /* Sesuai 'gibei-primary' */
 }
 
-/* 3. PERBAIKAN: Mengembalikan durasi transisi
-   ke 0.2s (200ms) sesuai preferensi Anda.
+/* PERBAIKAN: Menghapus class .fade-enter-active, .fade-leave-active, 
+  .fade-enter-from, dan .fade-leave-to dari sini.
 */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}

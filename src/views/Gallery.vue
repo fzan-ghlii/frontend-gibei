@@ -1,14 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue'
+// PENYEMPURNAAN: Menghapus 'computed' yang tidak terpakai
+import { ref } from 'vue'
 
-// --- State untuk Tabs (WDD 3.0) ---
-const activeTab = ref('foto') // 'foto' or 'video'
-
-// --- State untuk Lightbox/Modal ---
+const activeTab = ref('foto') // 'foto' atau 'video'
 const isModalOpen = ref(false)
 const currentImage = ref({ src: '', alt: '' })
 
-// --- Data Placeholder Galeri (Nanti dari API/CMS) ---
+// Data Placeholder
 const photoGallery = ref([
   { id: 1, src: 'https://placehold.co/600x400/1a4162/ffffff?text=SPM+2025', alt: 'Galeri Foto SPM 2025', category: 'SPM', delay: 100 },
   { id: 2, src: 'https://placehold.co/600x400/e6d9c6/333333?text=Workshop', alt: 'Galeri Foto Workshop Teknikal', category: 'Workshop', delay: 200 },
@@ -23,12 +21,11 @@ const videoGallery = ref([
   { id: 2, embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', title: 'Video: Recap SPM 2025', delay: 200 },
 ])
 
-// --- Fungsi Lightbox ---
+// Logika Modal Lightbox
 const openModal = (image) => {
   currentImage.value = image
   isModalOpen.value = true
 }
-
 const closeModal = () => {
   isModalOpen.value = false
 }
@@ -42,7 +39,7 @@ const closeModal = () => {
         <h1 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }"
+          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 200 } }"
           class="font-poppins text-5xl md:text-7xl font-extrabold text-gibei-primary"
         >
           Galeri Kegiatan
@@ -50,7 +47,7 @@ const closeModal = () => {
         <p 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 100 } }"
+          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 300 } }"
           class="mt-4 text-xl text-gibei-text max-w-2xl mx-auto"
         >
           Momen dan dokumentasi dari berbagai kegiatan GIBEI UNIMED.
@@ -58,15 +55,15 @@ const closeModal = () => {
       </div>
     </section>
 
-    <!-- Section 2: Tabs dan Konten Galeri (WDD 3.0) -->
+    <!-- Section 2: Tab dan Konten Galeri -->
     <section class="py-20 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Tab Kontrol (Foto/Video) -->
+        <!-- Tab Switcher (Foto/Video) -->
         <div 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 200 } }"
+          :visibleOnce="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }"
           class="flex justify-center gap-4 mb-16"
         >
           <button
@@ -93,7 +90,7 @@ const closeModal = () => {
           </button>
         </div>
 
-        <!-- Konten: Galeri Foto -->
+        <!-- Konten Galeri Foto -->
         <div v-if="activeTab === 'foto'">
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div
@@ -114,7 +111,7 @@ const closeModal = () => {
           </div>
         </div>
 
-        <!-- Konten: Galeri Video (WDD 6.0 - Embed) -->
+        <!-- Konten Galeri Video (WDD 3.0) -->
         <div v-if="activeTab === 'video'">
           <div class="grid md:grid-cols-2 gap-8">
             <div
@@ -125,8 +122,8 @@ const closeModal = () => {
               :visibleOnce="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: video.delay } }"
               class="rounded-lg shadow-lg overflow-hidden"
             >
+              <!-- Wrapper untuk rasio 16:9 -->
               <div class="aspect-w-16 aspect-h-9">
-                <!-- Placeholder untuk Iframe Embed -->
                 <iframe 
                   :src="video.embedUrl" 
                   :title="video.title" 
@@ -142,7 +139,7 @@ const closeModal = () => {
       </div>
     </section>
 
-    <!-- Modal/Lightbox untuk Galeri Foto -->
+    <!-- Modal Lightbox (untuk Foto) -->
     <transition
       enter-active-class="transition-opacity ease-out duration-300"
       enter-from-class="opacity-0"
@@ -156,12 +153,11 @@ const closeModal = () => {
         @click="closeModal" 
         class="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-4"
       >
-        <!-- Konten Modal -->
         <div 
           class="relative max-w-3xl max-h-full"
-          @click.stop <!-- Mencegah klik di dalam gambar menutup modal -->
+          @click.stop
         >
-          <!-- Tombol Close (X) -->
+          <!-- Tombol Close -->
           <button
             @click="closeModal"
             class="absolute -top-12 right-0 text-white text-4xl font-bold opacity-70 hover:opacity-100 transition"
@@ -169,35 +165,29 @@ const closeModal = () => {
             &times;
           </button>
           
-          <!-- Gambar -->
+          <!-- Gambar yang Diperbesar -->
           <img 
             :src="currentImage.src" 
             :alt="currentImage.alt" 
             class="rounded-lg shadow-2xl max-w-full max-h-[80vh] object-contain"
           >
           
-          <!-- Caption -->
+          <!-- Keterangan Gambar -->
           <p class="text-white text-center font-inter mt-4 opacity-80">
             {{ currentImage.alt }}
           </p>
         </div>
       </div>
     </transition>
-
   </div>
 </template>
 
 <style>
-/* Tailwind Aspect Ratio (untuk video embed)
-  Jika Anda belum menginstalnya: npm install -D @tailwindcss/aspect-ratio
-  Lalu tambahkan di tailwind.config.js: plugins: [require('@tailwindcss/aspect-ratio')],
-  
-  Untuk kesederhanaan, kita bisa gunakan trik CSS:
-*/
+/* Utility class untuk rasio aspek video (Tailwind tidak punya ini by default) */
 .aspect-w-16 {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio (9 / 16 = 0.5625) */
+  padding-bottom: 56.25%; /* 16:9 */
 }
 .aspect-h-9 {
   position: absolute;
