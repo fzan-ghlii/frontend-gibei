@@ -1,5 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+// UPGRADE 2 & 3: Import 'computed' dan 'useWindowScroll' untuk glassmorphism
+// dan 'isLoggedIn' untuk state login
+import { ref, computed } from 'vue'
+import { useWindowScroll } from '@vueuse/core'
+import { isLoggedIn } from '../store/auth.js' // UPGRADE 3
 
 const isMobileMenuOpen = ref(false)
 
@@ -13,10 +17,24 @@ const navLinks = [
   { name: 'Gallery', to: '/gallery' },
   { name: 'Kontak', to: '/kontak' },
 ]
+
+// UPGRADE 2: Logika untuk Glassmorphism
+// Navbar akan berubah style jika di-scroll lebih dari 20px
+const { y } = useWindowScroll()
+const isScrolled = computed(() => y.value > 20)
 </script>
 
 <template>
-  <nav class="bg-gibei-primary sticky top-0 z-50 shadow-md">
+  <!-- 
+    UPGRADE 2: 
+    - Menghapus 'bg-gibei-primary' dari class utama.
+    - Menambahkan 'transition-all duration-300'.
+    - Menambahkan :class binding untuk style 'isScrolled'.
+  -->
+  <nav 
+    class="sticky top-0 z-50 shadow-md transition-all duration-300"
+    :class="isScrolled ? 'bg-gibei-primary/90 backdrop-blur-lg' : 'bg-gibei-primary'"
+  >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
@@ -45,12 +63,23 @@ const navLinks = [
 
         <!-- Tombol Login (Kanan, Desktop) - (WDD 4.4) -->
         <div class="hidden md:block">
-          <!-- PERBAIKAN: Menggunakan <router-link> alih-alih <a> -->
+          <!-- 
+            UPGRADE 3: Tombol Login / Dashboard
+            Menggunakan v-if dan v-else untuk beralih tampilan
+          -->
           <router-link
+            v-if="!isLoggedIn"
             to="/login"
             class="bg-white text-gibei-primary font-poppins font-semibold px-5 py-2 rounded-full text-sm hover:bg-gibei-secondary transition-colors duration-300 transform hover:scale-105"
           >
             Login / Daftar
+          </router-link>
+          <router-link
+            v-else
+            to="/dashboard"
+            class="bg-gibei-secondary text-gibei-primary font-poppins font-semibold px-5 py-2 rounded-full text-sm hover:bg-white transition-colors duration-300 transform hover:scale-105"
+          >
+            Dashboard
           </router-link>
         </div>
 
@@ -74,7 +103,10 @@ const navLinks = [
       </div>
     </div>
 
-    <!-- Dropdown Menu Mobile -->
+    <!-- 
+      Dropdown Menu Mobile
+      UPGRADE 2: Transisi warna disamakan dengan style 'isScrolled'
+    -->
     <transition
       enter-active-class="transition ease-out duration-200 transform"
       enter-from-class="opacity-0 scale-95"
@@ -83,7 +115,11 @@ const navLinks = [
       leave-from-class="opacity-100 scale-100"
       leave-to-class="opacity-0 scale-95"
     >
-      <div v-if="isMobileMenuOpen" class="md:hidden bg-gibei-primary border-t border-white border-opacity-20">
+      <div 
+        v-if="isMobileMenuOpen" 
+        class="md:hidden border-t border-white border-opacity-20 transition-all duration-300"
+        :class="isScrolled ? 'bg-gibei-primary/90 backdrop-blur-lg' : 'bg-gibei-primary'"
+      >
         <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <li v-for="link in navLinks" :key="link.name">
             <router-link
@@ -95,15 +131,25 @@ const navLinks = [
               {{ link.name }}
             </router-link>
           </li>
-          <!-- Tombol Login (Mobile) -->
-          <li>
-            <!-- PERBAIKAN: Menggunakan <router-link> alih-alih <a> -->
+          <!-- 
+            UPGRADE 3: Tombol Login / Dashboard (Mobile)
+          -->
+          <li v-if="!isLoggedIn">
             <router-link
               to="/login"
               class="bg-gibei-secondary text-gibei-primary block px-3 py-3 rounded-md text-base font-poppins font-semibold transition-colors mt-3 text-center"
               @click="isMobileMenuOpen = false"
             >
               Login / Daftar
+            </router-link>
+          </li>
+          <li v-else>
+            <router-link
+              to="/dashboard"
+              class="bg-white text-gibei-primary block px-3 py-3 rounded-md text-base font-poppins font-semibold transition-colors mt-3 text-center"
+              @click="isMobileMenuOpen = false"
+            >
+              Dashboard
             </router-link>
           </li>
         </ul>

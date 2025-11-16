@@ -1,6 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+// UPGRADE 2: Import 'onMounted'
+import { ref, onMounted } from 'vue'
 import EventCard from './EventCard.vue'
+// UPGRADE 2: Import 'EventCardSkeleton'
+import EventCardSkeleton from './EventCardSkeleton.vue'
+
+// UPGRADE 2: State loading
+const isLoading = ref(true)
 
 // PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
 const upcomingEvents = ref([
@@ -32,6 +38,13 @@ const upcomingEvents = ref([
     delay: 300,
   },
 ])
+
+// UPGRADE 2: Simulasi data fetch
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false
+  }, 1000) // Tampilkan skeleton selama 1 detik
+})
 </script>
 
 <template>
@@ -52,9 +65,14 @@ const upcomingEvents = ref([
           Jangan lewatkan kesempatan untuk belajar dan berkembang bersama kami.
         </p>
       </div>
+      
+      <!-- UPGRADE 2: Grid Skeleton (ditampilkan saat isLoading) -->
+      <div v-if="isLoading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <EventCardSkeleton v-for="n in 3" :key="n" />
+      </div>
 
-      <!-- Grid untuk Kartu Event -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Grid untuk Kartu Event (ditampilkan setelah loading) -->
+      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <EventCard 
           v-for="event in upcomingEvents" 
           :key="event.id" 

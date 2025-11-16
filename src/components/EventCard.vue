@@ -6,6 +6,10 @@ defineProps({
 </script>
 
 <template>
+  <!-- 
+    UPGRADE 1: 
+    - Menambahkan 'hover:shadow-2xl' untuk efek 'mewah'.
+  -->
   <div 
     v-motion
     :initial="{ opacity: 0, y: 50 }"
@@ -14,6 +18,11 @@ defineProps({
   >
     <!-- Gambar/Poster Event -->
     <div class="overflow-hidden">
+      <!-- 
+        UPGRADE 1:
+        - Memindahkan 'group-hover:scale-110' ke <img>.
+        - Menambahkan 'duration-500 ease-in-out'.
+      -->
       <img 
         :src="event.imageUrl" 
         :alt="'Poster ' + event.title" 
@@ -33,10 +42,14 @@ defineProps({
 
       <!-- Tombol Daftar (CTA) -->
       <div class="mt-auto">
-        <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
+        <!-- 
+          UPGRADE 1:
+          - Menambahkan 'group-hover:-translate-y-1' untuk efek 'mewah'.
+          - Menambahkan 'hover:shadow-xl'
+        -->
         <router-link 
           :to="event.link"
-          class="inline-block bg-gibei-primary text-white font-poppins font-medium px-6 py-2 rounded-md shadow-md transform transition-transform duration-300 hover:scale-105 hover:bg-blue-900"
+          class="inline-block bg-gibei-primary text-white font-poppins font-medium px-6 py-2 rounded-md shadow-md transform transition-all duration-300 hover:scale-105 hover:bg-blue-900 group-hover:-translate-y-1 hover:shadow-xl"
         >
           Daftar Sekarang
         </router-link>

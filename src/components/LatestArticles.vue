@@ -1,6 +1,12 @@
 <script setup>
-import { ref } from 'vue'
+// UPGRADE 2: Import 'onMounted'
+import { ref, onMounted } from 'vue'
 import ArticleCard from './ArticleCard.vue'
+// UPGRADE 2: Import 'ArticleCardSkeleton'
+import ArticleCardSkeleton from './ArticleCardSkeleton.vue'
+
+// UPGRADE 2: State loading
+const isLoading = ref(true)
 
 // PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
 const dummyArticles = ref([
@@ -29,6 +35,13 @@ const dummyArticles = ref([
     delay: 300,
   },
 ])
+
+// UPGRADE 2: Simulasi data fetch
+onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false
+  }, 1200) // Tampilkan skeleton selama 1.2 detik
+})
 </script>
 
 <template>
@@ -50,8 +63,13 @@ const dummyArticles = ref([
         </p>
       </div>
 
-      <!-- Grid untuk Kartu Artikel -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- UPGRADE 2: Grid Skeleton (ditampilkan saat isLoading) -->
+      <div v-if="isLoading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ArticleCardSkeleton v-for="n in 3" :key="n" />
+      </div>
+      
+      <!-- Grid untuk Kartu Artikel (ditampilkan setelah loading) -->
+      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <ArticleCard 
           v-for="article in dummyArticles" 
           :key="article.id" 

@@ -6,8 +6,9 @@ import SPM from '../views/SPM.vue'
 import Articles from '../views/Articles.vue'
 import Gallery from '../views/Gallery.vue'
 import Contact from '../views/Contact.vue'
-// 1. Impor Halaman Login baru
 import Login from '../views/Login.vue'
+// UPGRADE 3: Impor Halaman Dashboard baru
+import Dashboard from '../views/Dashboard.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -17,11 +18,18 @@ const routes = [
   { path: '/artikel', name: 'Artikel', component: Articles },
   { path: '/gallery', name: 'Gallery', component: Gallery },
   { path: '/kontak', name: 'Kontak', component: Contact },
-  // 2. Tambahkan Rute Login (WDD 8.0)
   {
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  // UPGRADE 3: Tambahkan Rute Dashboard (WDD 8.0)
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    // Nanti kita bisa tambahkan 'meta: { requiresAuth: true }'
+    // jika sudah ada sistem login backend
   },
 ]
 

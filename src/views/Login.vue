@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+// UPGRADE 3: Import state login dan router
+import { isLoggedIn } from '../store/auth.js'
+import { useRouter } from 'vue-router'
 
 // State untuk beralih antara 'login' dan 'register'
 const currentView = ref('login') // 'login' or 'register'
@@ -11,16 +14,31 @@ const registerData = ref({ name: '', email: '', password: '', confirmPassword: '
 // Placeholder untuk notifikasi (jika diperlukan nanti)
 const isLoading = ref(false)
 
+// UPGRADE 3: Inisialisasi router
+const router = useRouter()
+
 const handleLogin = () => {
   isLoading.value = true
   console.log('Login attempt:', loginData.value)
-  setTimeout(() => { isLoading.value = false }, 1500)
+  setTimeout(() => { 
+    isLoading.value = false
+    // UPGRADE 3: Set state login ke true dan redirect ke dashboard
+    isLoggedIn.value = true
+    router.push('/dashboard')
+  }, 1500)
 }
 
 const handleRegister = () => {
   isLoading.value = true
   console.log('Register attempt:', registerData.value)
-  setTimeout(() => { isLoading.value = false }, 1500)
+  // Simulasi register, lalu ganti ke view login
+  setTimeout(() => { 
+    isLoading.value = false
+    currentView.value = 'login'
+    // Di aplikasi nyata, kita juga akan login dan redirect
+    // isLoggedIn.value = true
+    // router.push('/dashboard')
+  }, 1500)
 }
 </script>
 

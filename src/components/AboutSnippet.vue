@@ -1,5 +1,18 @@
 <script setup>
-// Komponen ini akan menampilkan cuplikan "Tentang Kami" di Halaman Utama
+// UPGRADE 1: Import 'computed' dan 'useWindowScroll' untuk parallax
+import { computed } from 'vue'
+import { useWindowScroll } from '@vueuse/core'
+
+// --- UPGRADE 1: Logika Parallax ---
+const { y } = useWindowScroll()
+
+// Menghitung style transform untuk gambar
+// Gambar akan bergerak ke atas 0.1x lebih lambat dari scroll
+// Ini akan menciptakan ilusi kedalaman (depth)
+const parallaxStyle = computed(() => ({
+  transform: `translateY(-${y.value * 0.05}px)`
+}))
+// --- Akhir Upgrade 1 ---
 </script>
 
 <template>
@@ -13,7 +26,7 @@
           v-motion
           :initial="{ opacity: 0, x: -100 }"
           :visibleOnce="{ opacity: 1, x: 0, transition: { type: 'spring', stiffness: 100, delay: 100 } }"
-          class="space-y-6"
+          class="space-y-6 z-10"
         >
           <span class="inline-block px-4 py-1 bg-gibei-secondary text-gibei-primary font-poppins font-semibold text-sm rounded-full">
             Tentang Kami
@@ -44,11 +57,16 @@
           :visibleOnce="{ opacity: 1, x: 0, transition: { type: 'spring', stiffness: 100, delay: 200 } }"
           class="flex justify-center items-center"
         >
-          <!-- PERBAIKAN: Mengganti placeholder (WDD 5.4) -->
+          <!-- 
+            PERBAIKAN: Mengganti h-96 (fixed height) menjadi h-full (fill height).
+            Ini akan membuat gambar meregang setinggi kolom teks,
+            sehingga tata letaknya simetris.
+          -->
           <img 
             src="https://source.unsplash.com/800x600/?team,meeting,professional" 
             alt="Tim GIBEI UNIMED"
-            class="w-full h-96 object-cover rounded-lg shadow-xl"
+            class="w-full h-full object-cover rounded-lg shadow-xl"
+            :style="parallaxStyle"
           >
         </div>
 

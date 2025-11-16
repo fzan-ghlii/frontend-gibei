@@ -1,5 +1,7 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+// UPGRADE 1: Import 'computed' dan 'useWindowScroll' untuk parallax
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { useWindowScroll } from '@vueuse/core'
 
 // --- Logika Typewriter ---
 const sloganDisplay = ref('')
@@ -51,6 +53,17 @@ onUnmounted(() => {
   clearTimeout(eraseTimeout);
 })
 // --- Akhir Logika Typewriter ---
+
+// --- UPGRADE 1: Logika Parallax ---
+// Mengambil posisi scroll Y window
+const { y } = useWindowScroll()
+
+// Menghitung style transform berdasarkan posisi scroll
+// Teks akan bergerak ke atas (negatif Y) 0.15x lebih cepat dari scroll
+const parallaxStyle = computed(() => ({
+  transform: `translateY(-${y.value * 0.15}px)`
+}))
+// --- Akhir Upgrade 1 ---
 </script>
 
 <template>
@@ -58,7 +71,11 @@ onUnmounted(() => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="min-h-screen flex flex-col justify-center items-center text-center overflow-hidden">
         
-        <div class="space-y-6">
+        <!-- 
+          UPGRADE 1: Menambahkan :style="parallaxStyle"
+          untuk memberi efek parallax pada seluruh blok teks.
+        -->
+        <div class="space-y-6" :style="parallaxStyle">
           
           <!-- Slogan (WDD 4.1) -->
           <h2 
