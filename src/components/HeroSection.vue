@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 // --- Logika Typewriter ---
 const sloganDisplay = ref('')
@@ -8,14 +8,18 @@ const typingSpeed = 100
 const deletingSpeed = 50
 const pauseDuration = 2000
 
+// PERBAIKAN: Variabel untuk menyimpan semua ID timeout
+let timeouts = []
+
 // Fungsi untuk mengetik
 const type = (text, index, callback) => {
   if (index < text.length) {
     sloganDisplay.value = text.substring(0, index + 1)
-    setTimeout(() => type(text, index + 1, callback), typingSpeed)
+    const timeoutId = setTimeout(() => type(text, index + 1, callback), typingSpeed)
+    timeouts.push(timeoutId)
   } else {
-    // Selesai mengetik, jeda sebelum menghapus
-    setTimeout(callback, pauseDuration)
+    const timeoutId = setTimeout(callback, pauseDuration)
+    timeouts.push(timeoutId)
   }
 }
 
@@ -24,10 +28,11 @@ const erase = (callback) => {
   const text = sloganDisplay.value
   if (text.length > 0) {
     sloganDisplay.value = text.substring(0, text.length - 1)
-    setTimeout(erase, deletingSpeed, callback)
+    const timeoutId = setTimeout(erase, deletingSpeed, callback)
+    timeouts.push(timeoutId)
   } else {
-    // Selesai menghapus, jeda sebelum mengetik lagi
-    setTimeout(callback, 500) 
+    const timeoutId = setTimeout(callback, 500) 
+    timeouts.push(timeoutId)
   }
 }
 
@@ -39,8 +44,15 @@ const typeLoop = () => {
 }
 
 onMounted(() => {
-  // Mulai animasi 1 detik setelah komponen di-mount
-  setTimeout(typeLoop, 1000)
+  // Hapus array timeout lama (jika ada) dan mulai loop
+  timeouts.forEach(clearTimeout) // Hapus sisa timeout (jika ada)
+  timeouts = []
+  typeLoop()
+})
+
+// PERBAIKAN: Hentikan semua loop saat pindah halaman
+onUnmounted(() => {
+  timeouts.forEach(clearTimeout)
 })
 // --- Akhir Logika Typewriter ---
 </script>
@@ -52,10 +64,6 @@ onMounted(() => {
   -->
   <section class="bg-gibei-secondary">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- 
-        Kita tambahkan 'overflow-hidden' di sini agar 
-        animasi 'slide-up' tidak menyebabkan scrollbar saat loading.
-      -->
       <div class="min-h-screen flex flex-col justify-center items-center text-center overflow-hidden">
         
         <div class="space-y-6">
@@ -64,14 +72,13 @@ onMounted(() => {
           <h2 
             class="font-inter text-lg md:text-xl text-gibei-text font-medium tracking-wide uppercase min-h-[1.5em]"
           >
-            <!-- 
-              Menghapus v-motion, diganti dengan ref sloganDisplay 
-              min-h-[1.5em] ditambahkan agar layout tidak 'jiggle' saat teks kosong
-            -->
             {{ sloganDisplay }}<span class="blinking-cursor">|</span>
           </h2>
 
-          <!-- Judul Utama (WDD 4.1) -->
+          <!-- 
+            PERBAIKAN: Animasi di HeroSection HARUS menggunakan :enter
+            karena terlihat saat load, bukan saat scroll.
+          -->
           <h1 
             v-motion
             :initial="{ opacity: 0, y: 50 }"
@@ -82,7 +89,6 @@ onMounted(() => {
             GIBEI UNIMED
           </h1>
 
-          <!-- Deskripsi singkat -->
           <p 
             v-motion
             :initial="{ opacity: 0, y: 50 }"
@@ -92,7 +98,6 @@ onMounted(() => {
             Pusat informasi, edukasi, dan registrasi digital untuk seluruh kegiatan Galeri Investasi BEI Universitas Negeri Medan.
           </p>
 
-          <!-- CTA Utama (WDD 4.1) -->
           <div
             v-motion
             :initial="{ opacity: 0, y: 50 }"
@@ -106,7 +111,6 @@ onMounted(() => {
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </section>

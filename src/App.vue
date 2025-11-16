@@ -10,32 +10,18 @@ import Footer from './components/Footer.vue'
   
   <main>
     <!-- 
-      Di sinilah keajaibannya: 
-      vue-router akan otomatis menempatkan Halaman Home
-      atau Halaman About (atau halaman lain) di sini
-      tergantung pada URL.
+      PERBAIKAN: 
+      Wrapper <transition> dihapus untuk memperbaiki bug
+      halaman kosong saat navigasi.
     -->
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <router-view />
   </main>
 
   <Footer />
 </template>
 
 <style>
-/* CSS global ditangani oleh src/style.css */
-
-/* Transisi Halaman (Fade) */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+/* PERBAIKAN: 
+  Class .fade-* telah dihapus dari sini.
+*/
 </style>
