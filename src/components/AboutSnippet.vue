@@ -28,7 +28,6 @@
             Kami berkomitmen untuk membangun generasi muda yang melek investasi, profesional, dan berintegritas.
           </p>
           <div>
-            <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
             <router-link 
               to="/about" 
               class="inline-block bg-gibei-primary text-white font-poppins font-semibold px-8 py-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"
@@ -45,12 +44,12 @@
           :visibleOnce="{ opacity: 1, x: 0, transition: { type: 'spring', stiffness: 100, delay: 200 } }"
           class="flex justify-center items-center"
         >
-          <!-- Placeholder untuk gambar tim atau galeri -->
-          <div class="w-full h-96 bg-gibei-secondary rounded-lg shadow-xl flex items-center justify-center">
-            <span class="font-poppins text-gibei-primary text-2xl font-semibold">
-              [Image Placeholder]
-            </span>
-          </div>
+          <!-- PERBAIKAN: Mengganti placeholder (WDD 5.4) -->
+          <img 
+            src="https://source.unsplash.com/800x600/?team,meeting,professional" 
+            alt="Tim GIBEI UNIMED"
+            class="w-full h-96 object-cover rounded-lg shadow-xl"
+          >
         </div>
 
       </div>

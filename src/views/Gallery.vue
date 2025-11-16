@@ -1,19 +1,18 @@
 <script setup>
-// PENYEMPURNAAN: Menghapus 'computed' yang tidak terpakai
 import { ref } from 'vue'
 
 const activeTab = ref('foto') // 'foto' atau 'video'
 const isModalOpen = ref(false)
 const currentImage = ref({ src: '', alt: '' })
 
-// Data Placeholder
+// PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
 const photoGallery = ref([
-  { id: 1, src: 'https://placehold.co/600x400/1a4162/ffffff?text=SPM+2025', alt: 'Galeri Foto SPM 2025', category: 'SPM', delay: 100 },
-  { id: 2, src: 'https://placehold.co/600x400/e6d9c6/333333?text=Workshop', alt: 'Galeri Foto Workshop Teknikal', category: 'Workshop', delay: 200 },
-  { id: 3, src: 'https://placehold.co/600x400/1a4162/ffffff?text=Kunjungan+BEI', alt: 'Galeri Foto Kunjungan BEI', category: 'Kunjungan', delay: 300 },
-  { id: 4, src: 'https://placehold.co/600x400/e6d9c6/333333?text=Webinar+2025', alt: 'Galeri Foto Webinar 2025', category: 'Webinar', delay: 100 },
-  { id: 5, src: 'https://placehold.co/600x400/1a4162/ffffff?text=Trading+Comp', alt: 'Galeri Foto Trading Competition', category: 'Kompetisi', delay: 200 },
-  { id: 6, src: 'https://placehold.co/600x400/e6d9c6/333333?text=Edukasi+Publik', alt: 'Galeri Foto Edukasi Publik', category: 'Edukasi', delay: 300 },
+  { id: 1, src: 'https://source.unsplash.com/600x400/?conference,audience', alt: 'Galeri Foto SPM 2025', category: 'SPM', delay: 100 },
+  { id: 2, src: 'https://source.unsplash.com/600x400/?presentation,meeting', alt: 'Galeri Foto Workshop Teknikal', category: 'Workshop', delay: 200 },
+  { id: 3, src: 'https://source.unsplash.com/600x400/?office,building', alt: 'Galeri Foto Kunjungan BEI', category: 'Kunjungan', delay: 300 },
+  { id: 4, src: 'https://source.unsplash.com/600x400/?webinar,online', alt: 'Galeri Foto Webinar 2025', category: 'Webinar', delay: 100 },
+  { id: 5, src: 'https://source.unsplash.com/600x400/?competition,trophy', alt: 'Galeri Foto Trading Competition', category: 'Kompetisi', delay: 200 },
+  { id: 6, src: 'https://source.unsplash.com/600x400/?community,people', alt: 'Galeri Foto Edukasi Publik', category: 'Edukasi', delay: 300 },
 ])
 
 const videoGallery = ref([

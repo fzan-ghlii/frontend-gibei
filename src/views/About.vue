@@ -1,82 +1,76 @@
 <script setup>
 import { ref } from 'vue'
-// 1. Impor komponen ProfileCard
 import ProfileCard from '../components/ProfileCard.vue'
 
-// === DATA ORGANISASI ===
-
-// 2. Data Pembina
+// PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
+const placeholderImg = 'https://placehold.co/128x128/e6d9c6/333333?text=Foto'
 const pembina = ref([
-  { id: 'p1', name: 'Dita Eka Pertiwi Sirait, S.E., M.Si.', title: 'Pembina GIBEI UNIMED', imageUrl: 'https://placehold.co/128x128/1a4162/ffffff?text=Pembina', delay: 100 },
+  { id: 'p1', name: 'Dita Eka Pertiwi Sirait, S.E., M.Si.', title: 'Pembina GIBEI UNIMED', imageUrl: 'https://source.unsplash.com/128x128/?woman,professional,portrait', delay: 100 },
 ])
-
-// 3. Data Presidium
 const presidium = ref([
-  { id: 'bph1', name: 'Andrian', title: 'Presiden Direktur', imageUrl: 'https://placehold.co/128x128/1a4162/ffffff?text=Presdir', delay: 100 },
-  { id: 'bph2', name: 'Noubel Putra Nainggolan', title: 'Wakil Direktur', imageUrl: 'https://placehold.co/128x128/1a4162/ffffff?text=Wakil', delay: 200 },
-  { id: 'bph3', name: 'Suci Ramadani', title: 'Sekretaris Jendral', imageUrl: 'https://placehold.co/128x128/1a4162/ffffff?text=Sekjen', delay: 300 },
-  { id: 'bph4', name: 'Valentina Rentauli Siringo Ringo', title: 'Bendahara Umum', imageUrl: 'https://placehold.co/128x128/1a4162/ffffff?text=Bendum', delay: 400 },
+  { id: 'bph1', name: 'Andrian', title: 'Presiden Direktur', imageUrl: 'https://source.unsplash.com/128x128/?man,professional,portrait', delay: 100 },
+  { id: 'bph2', name: 'Noubel Putra Nainggolan', title: 'Wakil Direktur', imageUrl: 'https://source.unsplash.com/128x128/?man,portrait,professional', delay: 200 },
+  { id: 'bph3', name: 'Suci Ramadani', title: 'Sekretaris Jendral', imageUrl: 'https://source.unsplash.com/128x128/?woman,portrait,professional', delay: 300 },
+  { id: 'bph4', name: 'Valentina Rentauli Siringo Ringo', title: 'Bendahara Umum', imageUrl: 'https://source.unsplash.com/128x128/?woman,professional,portrait', delay: 400 },
 ])
-
-// 4. Data Divisi-Divisi
 const divisions = ref([
   {
     name: 'Divisi Kegiatan',
     members: [
-      { id: 'dk1', name: 'Artika Wulandari', title: 'Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Kadiv', delay: 100 },
-      { id: 'dk2', name: 'Vailimlim Simamora', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 200 },
-      { id: 'dk3', name: 'Sutria Evi Fania', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 300 },
-      { id: 'dk4', name: 'Saniah Lidiya Hawani', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 400 },
-      { id: 'dk5', name: 'Peter Nov Barus', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 500 },
-      { id: 'dk6', name: 'Ruwinah Rahmanda', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 600 },
-      { id: 'dk7', name: 'Muhammad Ariel', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 700 },
+      { id: 'dk1', name: 'Artika Wulandari', title: 'Kepala Divisi', imageUrl: placeholderImg, delay: 100 },
+      { id: 'dk2', name: 'Vailimlim Simamora', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 200 },
+      { id: 'dk3', name: 'Sutria Evi Fania', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 300 },
+      { id: 'dk4', name: 'Saniah Lidiya Hawani', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 400 },
+      { id: 'dk5', name: 'Peter Nov Barus', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 500 },
+      { id: 'dk6', name: 'Ruwinah Rahmanda', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 600 },
+      { id: 'dk7', name: 'Muhammad Ariel', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 700 },
     ]
   },
   {
     name: 'Divisi Investasi',
     members: [
-      { id: 'di1', name: 'Muhammad Ilyas Sapawi', title: 'Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Kadiv', delay: 100 },
-      { id: 'di2', name: 'Fauzan Al Gholi', title: 'Wakil Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Wakil', delay: 200 },
-      { id: 'di3', name: 'Annisa Alfathanasya', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 300 },
-      { id: 'di4', name: 'Desi Afriyani', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 400 },
-      { id: 'di5', name: 'Radhika Narwastu', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 500 },
-      { id: 'di6', name: 'Arief Zaidan Ramadinata', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 600 },
+      { id: 'di1', name: 'Muhammad Ilyas Sapawi', title: 'Kepala Divisi', imageUrl: placeholderImg, delay: 100 },
+      { id: 'di2', name: 'Fauzan Al Gholi', title: 'Wakil Kepala Divisi', imageUrl: placeholderImg, delay: 200 },
+      { id: 'di3', name: 'Annisa Alfathanasya', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 300 },
+      { id: 'di4', name: 'Desi Afriyani', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 400 },
+      { id: 'di5', name: 'Radhika Narwastu', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 500 },
+      { id: 'di6', name: 'Arief Zaidan Ramadinata', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 600 },
     ]
   },
   {
     name: 'Divisi Media',
     members: [
-      { id: 'dm1', name: 'Joice Omasi Angelita Harefa', title: 'Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Kadiv', delay: 100 },
-      { id: 'dm2', name: 'Fihrna Karin Br Pinem', title: 'Wakil Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Wakil', delay: 200 },
-      { id: 'dm3', name: 'Maya Martiza Sari', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 300 },
-      { id: 'dm4', name: 'Joanna Brigitta, S.', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 400 },
-      { id: 'dm5', name: 'Mismauli Nainggolan', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 500 },
-      { id: 'dm6', name: 'Annisa Handayani', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 600 },
-      { id: 'dm7', name: 'M. Reza Firmansyah', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 700 },
-      { id: 'dm8', name: 'Ribka Intan Marini Sitorus', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 800 },
+      { id: 'dm1', name: 'Joice Omasi Angelita Harefa', title: 'Kepala Divisi', imageUrl: placeholderImg, delay: 100 },
+      { id: 'dm2', name: 'Fihrna Karin Br Pinem', title: 'Wakil Kepala Divisi', imageUrl: placeholderImg, delay: 200 },
+      { id: 'dm3', name: 'Maya Martiza Sari', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 300 },
+      { id: 'dm4', name: 'Joanna Brigitta, S.', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 400 },
+      { id: 'dm5', name: 'Mismauli Nainggolan', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 500 },
+      { id: 'dm6', name: 'Annisa Handayani', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 600 },
+      { id: 'dm7', name: 'M. Reza Firmansyah', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 700 },
+      { id: 'dm8', name: 'Ribka Intan Marini Sitorus', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 800 },
     ]
   },
   {
     name: 'Divisi HRD',
     members: [
-      { id: 'hrd1', name: 'Andini Aulia', title: 'Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Kadiv', delay: 100 },
-      { id: 'hrd2', name: 'Fikri Alfahmi Siregar', title: 'Wakil Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Wakil', delay: 200 },
-      { id: 'hrd3', name: 'M. Ifrandi Syahputra', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 300 },
-      { id: 'hrd4', name: 'Cecilia Miranda Br. Lumban Gaol', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 400 },
-      { id: 'hrd5', name: 'Vennia Artamevia Br. Sembiring', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 500 },
-      { id: 'hrd6', name: 'Muhammad Zikri', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 600 },
-      { id: 'hrd7', name: 'Vina Lestari Br. Ginting', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 700 },
+      { id: 'hrd1', name: 'Andini Aulia', title: 'Kepala Divisi', imageUrl: placeholderImg, delay: 100 },
+      { id: 'hrd2', name: 'Fikri Alfahmi Siregar', title: 'Wakil Kepala Divisi', imageUrl: placeholderImg, delay: 200 },
+      { id: 'hrd3', name: 'M. Ifrandi Syahputra', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 300 },
+      { id: 'hrd4', name: 'Cecilia Miranda Br. Lumban Gaol', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 400 },
+      { id: 'hrd5', name: 'Vennia Artamevia Br. Sembiring', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 500 },
+      { id: 'hrd6', name: 'Muhammad Zikri', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 600 },
+      { id: 'hrd7', name: 'Vina Lestari Br. Ginting', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 700 },
     ]
   },
   {
     name: 'Divisi Galeri',
     members: [
-      { id: 'dg1', name: 'Fanhas Abdul Rahman', title: 'Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Kadiv', delay: 100 },
-      { id: 'dg2', name: 'Laoren Valerina Sinaga', title: 'Wakil Kepala Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Wakil', delay: 200 },
-      { id: 'dg3', name: 'Putri Sandrina Sitompul', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 300 },
-      { id: 'dg4', name: 'Wiko Prayoga', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 400 },
-      { id: 'dg5', name: 'Anita Br Saragih', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 500 },
-      { id: 'dg6', name: 'Aurora Aqma Zahira Batubara', title: 'Anggota Divisi', imageUrl: 'https://placehold.co/128x128/e6d9c6/333333?text=Anggota', delay: 600 },
+      { id: 'dg1', name: 'Fanhas Abdul Rahman', title: 'Kepala Divisi', imageUrl: placeholderImg, delay: 100 },
+      { id: 'dg2', name: 'Laoren Valerina Sinaga', title: 'Wakil Kepala Divisi', imageUrl: placeholderImg, delay: 200 },
+      { id: 'dg3', name: 'Putri Sandrina Sitompul', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 300 },
+      { id: 'dg4', name: 'Wiko Prayoga', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 400 },
+      { id: 'dg5', name: 'Anita Br Saragih', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 500 },
+      { id: 'dg6', name: 'Aurora Aqma Zahira Batubara', title: 'Anggota Divisi', imageUrl: placeholderImg, delay: 600 },
     ]
   }
 ])
@@ -86,12 +80,11 @@ const divisions = ref([
   <div class="bg-white">
     <!-- Section 1: Page Header -->
     <section class="bg-gibei-secondary py-20 md:py-32">
-      <!-- ... (Konten Header Halaman tidak berubah) ... -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }"
+          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 200 } }"
           class="font-poppins text-5xl md:text-7xl font-extrabold text-gibei-primary"
         >
           Tentang Kami
@@ -99,7 +92,7 @@ const divisions = ref([
         <p 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 100 } }"
+          :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 300 } }"
           class="mt-4 text-xl text-gibei-text max-w-2xl mx-auto"
         >
           Mengenal lebih dekat GIBEI UNIMED, pusat edukasi dan literasi pasar modal.
@@ -109,8 +102,9 @@ const divisions = ref([
 
     <!-- Section 2: Sejarah & Visi Misi (WDD 3.0) -->
     <section class="py-20 md:py-28 overflow-hidden">
-      <!-- ... (Konten Sejarah & Visi Misi tidak berubah) ... -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        
+        <!-- Kolom Kiri: Teks Konten -->
         <div 
           v-motion
           :initial="{ opacity: 0, x: -100 }"
@@ -125,6 +119,7 @@ const divisions = ref([
               [Placeholder] GIBEI UNIMED didirikan pada [Tahun] sebagai hasil kerja sama antara Universitas Negeri Medan, Bursa Efek Indonesia, dan [Nama Sekuritas]. Sejak awal, kami berfokus untuk menjadi...
             </p>
           </div>
+          
           <div>
             <h2 class="font-poppins text-3xl md:text-4xl font-extrabold text-gibei-primary">
               Visi & Misi
@@ -141,27 +136,29 @@ const divisions = ref([
             </ul>
           </div>
         </div>
+        
+        <!-- Kolom Kanan: Placeholder Gambar/Visual -->
         <div
           v-motion
           :initial="{ opacity: 0, x: 100 }"
           :visibleOnce="{ opacity: 1, x: 0, transition: { type: 'spring', stiffness: 100, delay: 200 } }"
           class="flex justify-center items-center"
         >
-          <div class="w-full h-96 bg-gibei-primary rounded-lg shadow-xl flex items-center justify-center p-8">
-            <span class="font-poppins text-white text-2xl font-semibold text-center">
-              [Image Placeholder: Gedung FE / Acara Peresmian]
-            </span>
-          </div>
+          <!-- PERBAIKAN: Mengganti placeholder (WDD 5.4) -->
+          <img 
+            src="https://source.unsplash.com/800x600/?university,building" 
+            alt="Gedung Fakultas Ekonomi UNIMED"
+            class="w-full h-96 object-cover rounded-lg shadow-xl"
+          >
         </div>
+
       </div>
     </section>
 
-    <!-- Section 3: Struktur Organisasi (WDD 3.0) -->
+    <!-- Section 3: Struktur Organisasi -->
     <section class="bg-gibei-secondary py-20 md:py-28">
-      <!-- ... (Konten Struktur Organisasi tidak berubah) ... -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Judul Section Utama -->
         <div 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
@@ -228,13 +225,10 @@ const divisions = ref([
       </div>
     </section>
 
-    <!-- 
-      SECTION BARU: Mitra Kami (WDD 3.0)
-    -->
+    <!-- Section 4: Mitra Kami -->
     <section class="bg-white py-20 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <!-- Judul Section -->
         <div 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
@@ -249,7 +243,7 @@ const divisions = ref([
           </p>
         </div>
 
-        <!-- Grid Logo Mitra -->
+        <!-- PERBAIKAN: Mengganti placeholder <img> dengan SVG placeholder (WDD 5.4) -->
         <div 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
@@ -257,31 +251,25 @@ const divisions = ref([
           class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 items-center"
         >
           
-          <!-- Logo 1: UNIMED -->
+          <!-- Logo UNIMED Placeholder -->
           <div class="flex justify-center">
-            <img 
-              src="https://placehold.co/300x100/f0f0f0/999999?text=Logo+UNIMED" 
-              alt="Logo Universitas Negeri Medan" 
-              class="h-16 md:h-20 opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-            >
+            <div class="w-48 h-16 flex items-center justify-center bg-gray-100 rounded text-gray-400 font-poppins font-semibold opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0">
+              LOGO UNIMED
+            </div>
           </div>
           
-          <!-- Logo 2: BEI -->
+          <!-- Logo BEI Placeholder -->
           <div class="flex justify-center">
-            <img 
-              src="https://placehold.co/300x100/f0f0f0/999999?text=Logo+BEI" 
-              alt="Logo Bursa Efek Indonesia" 
-              class="h-16 md:h-20 opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-            >
+            <div class="w-48 h-16 flex items-center justify-center bg-gray-100 rounded text-gray-400 font-poppins font-semibold opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0">
+              LOGO BEI
+            </div>
           </div>
           
-          <!-- Logo 3: Sekuritas Mitra -->
+          <!-- Logo Sekuritas Placeholder -->
           <div class="flex justify-center col-span-2 md:col-span-1">
-            <img 
-              src="https://placehold.co/300x100/f0f0f0/999999?text=Logo+Sekuritas+Mitra" 
-              alt="Logo Sekuritas Mitra" 
-              class="h-16 md:h-20 opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-            >
+            <div class="w-48 h-16 flex items-center justify-center bg-gray-100 rounded text-gray-400 font-poppins font-semibold opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0">
+              LOGO SEKURITAS
+            </div>
           </div>
 
         </div>

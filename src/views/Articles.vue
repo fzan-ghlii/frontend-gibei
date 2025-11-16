@@ -2,16 +2,16 @@
 import { ref, computed } from 'vue'
 import ArticleCard from '../components/ArticleCard.vue'
 
-// Data placeholder...
+// PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
 const allArticles = ref([
-  { id: 1, title: 'Apa itu Reksadana? Panduan Lengkap untuk Pemula', category: 'Dasar Investasi', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Reksadana', link: '#', delay: 100, },
-  { id: 2, title: 'Memahami Risiko dan Imbal Hasil dalam Investasi Saham', category: 'Analisis', imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Risiko+Saham', link: '#', delay: 200, },
-  { id: 3, title: 'Diversifikasi Portofolio: Mengapa Anda Tidak Boleh Menaruh...', category: 'Tips & Trik', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Diversifikasi', link: '#', delay: 300, },
-  { id: 4, title: 'Pengenalan Analisis Fundamental: Membaca Laporan Keuangan', category: 'Analisis', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Fundamental', link: '#', delay: 100, },
-  { id: 5, title: 'Psikologi Trading: Mengelola Emosi Saat Berinvestasi', category: 'Tips & Trik', imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Psikologi', link: '#', delay: 200, },
-  { id: 6, title: 'Mengenal Obligasi: Pendapatan Tetap yang Stabil', category: 'Dasar Investasi', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Obligasi', link: '#', delay: 300, },
-  { id: 7, title: 'Panduan Analisis Teknikal: Pola Candlestick', category: 'Analisis', imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Teknikal', link: '#', delay: 100, },
-  { id: 8, title: 'Menyusun Rencana Investasi Jangka Panjang', category: 'Tips & Trik', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Rencana', link: '#', delay: 200, },
+  { id: 1, title: 'Apa itu Reksadana? Panduan Lengkap untuk Pemula', category: 'Dasar Investasi', imageUrl: 'https://source.unsplash.com/600x400/?finance,growth', link: '#', delay: 100, },
+  { id: 2, title: 'Memahami Risiko dan Imbal Hasil dalam Investasi Saham', category: 'Analisis', imageUrl: 'https://source.unsplash.com/600x400/?risk,chart', link: '#', delay: 200, },
+  { id: 3, title: 'Diversifikasi Portofolio: Mengapa Anda Tidak Boleh Menaruh...', category: 'Tips & Trik', imageUrl: 'https://source.unsplash.com/600x400/?collection,portfolio', link: '#', delay: 300, },
+  { id: 4, title: 'Pengenalan Analisis Fundamental: Membaca Laporan Keuangan', category: 'Analisis', imageUrl: 'https://source.unsplash.com/600x400/?financial,report', link: '#', delay: 100, },
+  { id: 5, title: 'Psikologi Trading: Mengelola Emosi Saat Berinvestasi', category: 'Tips & Trik', imageUrl: 'https://source.unsplash.com/600x400/?psychology,brain', link: '#', delay: 200, },
+  { id: 6, title: 'Mengenal Obligasi: Pendapatan Tetap yang Stabil', category: 'Dasar Investasi', imageUrl: 'https://source.unsplash.com/600x400/?bond,money', link: '#', delay: 300, },
+  { id: 7, title: 'Panduan Analisis Teknikal: Pola Candlestick', category: 'Analisis', imageUrl: 'https://source.unsplash.com/600x400/?candlestick,chart', link: '#', delay: 100, },
+  { id: 8, title: 'Menyusun Rencana Investasi Jangka Panjang', category: 'Tips & Trik', imageUrl: 'https://source.unsplash.com/600x400/?plan,future', link: '#', delay: 200, },
 ])
 
 const categories = ref([
@@ -109,9 +109,6 @@ const filteredArticles = computed(() => {
           </p>
         </div>
         
-        <!-- PENYEMPURNAAN: Tombol "Lihat Semua" dihapus dari halaman Artikel utama 
-             karena tidak relevan di sini. -->
-
       </div>
     </section>
   </div>

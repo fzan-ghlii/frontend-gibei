@@ -2,30 +2,30 @@
 import { ref } from 'vue'
 import ArticleCard from './ArticleCard.vue'
 
-// Data placeholder...
+// PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
 const dummyArticles = ref([
   {
     id: 1,
     title: 'Apa itu Reksadana? Panduan Lengkap untuk Pemula',
     category: 'Dasar Investasi',
-    imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Reksadana',
-    link: '/artikel', // PENYEMPURNAAN: Arahkan ke halaman Artikel
+    imageUrl: 'https://source.unsplash.com/600x400/?finance,growth',
+    link: '/artikel',
     delay: 100,
   },
   {
     id: 2,
     title: 'Memahami Risiko dan Imbal Hasil dalam Investasi Saham',
     category: 'Analisis',
-    imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Risiko+Saham',
-    link: '/artikel', // PENYEMPURNAAN: Arahkan ke halaman Artikel
+    imageUrl: 'https://source.unsplash.com/600x400/?risk,chart',
+    link: '/artikel',
     delay: 200,
   },
   {
     id: 3,
     title: 'Diversifikasi Portofolio: Mengapa Anda Tidak Boleh Menaruh...',
     category: 'Tips & Trik',
-    imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Diversifikasi',
-    link: '/artikel', // PENYEMPURNAAN: Arahkan ke halaman Artikel
+    imageUrl: 'https://source.unsplash.com/600x400/?collection,portfolio',
+    link: '/artikel',
     delay: 300,
   },
 ])
@@ -66,7 +66,6 @@ const dummyArticles = ref([
         :visibleOnce="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 400 } }"
         class="text-center mt-16"
       >
-        <!-- PENYEMPURNAAN: Menggunakan <router-link> alih-alih <a> -->
         <router-link 
           to="/artikel"
           class="inline-block bg-gibei-primary text-white font-poppins font-semibold px-8 py-3 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl"

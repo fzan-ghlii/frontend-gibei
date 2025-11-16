@@ -1,15 +1,14 @@
 <script setup>
-// PERBAIKAN: Menambahkan 'computed'
 import { ref, computed } from 'vue'
 import EventCard from '../components/EventCard.vue'
 
-// ... (Logika Search) ...
+// PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
 const allEvents = ref([
-  { id: 1, title: 'Sekolah Pasar Modal (SPM) Level 1', date: '20 DESEMBER 2025', description: 'Pelajari dasar-dasar investasi dan mekanisme pasar modal.', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=SPM+Level+1', link: '/spm', category: 'spm', delay: 100 },
-  { id: 2, title: 'Workshop Analisis Teknikal', date: '25 DESEMBER 2025', description: 'Pahami cara membaca grafik dan mengambil keputusan investasi.', imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Workshop', link: '/events', category: 'workshop', delay: 200 },
-  { id: 3, title: 'Webinar: Investasi Syariah', date: '30 DESEMBER 2025', description: 'Mengenal produk dan prinsip investasi yang sesuai syariah.', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Investasi+Syariah', link: '/events', category: 'webinar', delay: 300 },
-  { id: 4, title: 'Event Arsip: Kunjungan BEI 2024', date: '10 JANUARI 2024', description: 'Melihat langsung lantai bursa dan operasional BEI.', imageUrl: 'https://placehold.co/600x400/e6d9c6/333333?text=Arsip+Event', link: '/events', category: 'arsip', delay: 100 },
-  { id: 5, title: 'Event Arsip: Trading Competition 2024', date: '15 FEBRUARI 2024', description: 'Kompetisi trading virtual untuk mahasiswa UNIMED.', imageUrl: 'https://placehold.co/600x400/1a4162/ffffff?text=Arsip+Event', link: '/events', category: 'arsip', delay: 200 },
+  { id: 1, title: 'Sekolah Pasar Modal (SPM) Level 1', date: '20 DESEMBER 2025', description: 'Pelajari dasar-dasar investasi dan mekanisme pasar modal.', imageUrl: 'https://source.unsplash.com/600x400/?stock-market,study', link: '/spm', category: 'spm', delay: 100 },
+  { id: 2, title: 'Workshop Analisis Teknikal', date: '25 DESEMBER 2025', description: 'Pahami cara membaca grafik dan mengambil keputusan investasi.', imageUrl: 'https://source.unsplash.com/600x400/?presentation,workshop', link: '/events', category: 'workshop', delay: 200 },
+  { id: 3, title: 'Webinar: Investasi Syariah', date: '30 DESEMBER 2025', description: 'Mengenal produk dan prinsip investasi yang sesuai syariah.', imageUrl: 'https://source.unsplash.com/600x400/?islamic,finance', link: '/events', category: 'webinar', delay: 300 },
+  { id: 4, title: 'Event Arsip: Kunjungan BEI 2024', date: '10 JANUARI 2024', description: 'Melihat langsung lantai bursa dan operasional BEI.', imageUrl: 'https://source.unsplash.com/600x400/?conference,audience', link: '/events', category: 'arsip', delay: 100 },
+  { id: 5, title: 'Event Arsip: Trading Competition 2024', date: '15 FEBRUARI 2024', description: 'Kompetisi trading virtual untuk mahasiswa UNIMED.', imageUrl: 'https://source.unsplash.com/600x400/?competition,award', link: '/events', category: 'arsip', delay: 200 },
 ])
 const searchTerm = ref('')
 const filteredEvents = computed(() => {
@@ -22,7 +21,7 @@ const filteredEvents = computed(() => {
   )
 })
 
-// --- LOGIKA KALENDER (Dipindahkan ke sini) ---
+// --- LOGIKA KALENDER ---
 const currentDate = ref(new Date())
 const currentMonth = computed(() => currentDate.value.toLocaleString('id-ID', { month: 'long' }))
 const currentYear = computed(() => currentDate.value.getFullYear())
@@ -80,7 +79,7 @@ const isCurrentMonth = (day) => day <= 30 // Asumsi 30 hari
           </p>
         </div>
         
-        <!-- UI KALENDER (Dipindahkan ke sini) -->
+        <!-- UI KALENDER -->
         <div
           class="bg-white p-6 md:p-8 rounded-lg shadow-xl overflow-hidden border border-gray-200"
           v-motion
@@ -185,7 +184,7 @@ const isCurrentMonth = (day) => day <= 30 // Asumsi 30 hari
           </p>
         </div>
         
-        <!-- PENYEMPURNAAN: Tombol ini sekarang hanya untuk "Arsip" -->
+        <!-- Tombol "Lihat Event Arsip" -->
         <div 
           v-motion
           :initial="{ opacity: 0, y: 50 }"
