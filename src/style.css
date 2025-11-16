@@ -1,0 +1,22 @@
+/* 1. Impor layer dasar Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. (Opsional tapi direkomendasikan)
+    Terapkan font default dari WDD ke body dan headings 
+    Kita bisa menggunakan font-inter dan font-poppins dari config Tailwind,
+    tapi mengaturnya di sini lebih lugas untuk default.
+*/
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #333333; /* Sesuai 'gibei-text' */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  color: #1a4162; /* Sesuai 'gibei-primary' */
+}
