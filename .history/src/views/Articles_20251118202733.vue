@@ -1,67 +1,36 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import ArticleCard from '../components/ArticleCard.vue'
-import ArticleCardSkeleton from '../components/ArticleCardSkeleton.vue'
-import api from '../api' // Import axios instance
 
-// State Data
-const allArticles = ref([])
-const isLoading = ref(true)
-const error = ref(null)
+// PERBAIKAN: Mengganti placeholder gambar (WDD 5.4)
+const allArticles = ref([
+  { id: 1, title: 'Apa itu Reksadana? Panduan Lengkap untuk Pemula', category: 'Dasar Investasi', imageUrl: 'https://source.unsplash.com/600x400/?finance,growth', link: '#', delay: 100, },
+  { id: 2, title: 'Memahami Risiko dan Imbal Hasil dalam Investasi Saham', category: 'Analisis', imageUrl: 'https://source.unsplash.com/600x400/?risk,chart', link: '#', delay: 200, },
+  { id: 3, title: 'Diversifikasi Portofolio: Mengapa Anda Tidak Boleh Menaruh...', category: 'Tips & Trik', imageUrl: 'https://source.unsplash.com/600x400/?collection,portfolio', link: '#', delay: 300, },
+  { id: 4, title: 'Pengenalan Analisis Fundamental: Membaca Laporan Keuangan', category: 'Analisis', imageUrl: 'https://source.unsplash.com/600x400/?financial,report', link: '#', delay: 100, },
+  { id: 5, title: 'Psikologi Trading: Mengelola Emosi Saat Berinvestasi', category: 'Tips & Trik', imageUrl: 'https://source.unsplash.com/600x400/?psychology,brain', link: '#', delay: 200, },
+  { id: 6, title: 'Mengenal Obligasi: Pendapatan Tetap yang Stabil', category: 'Dasar Investasi', imageUrl: 'https://source.unsplash.com/600x400/?bond,money', link: '#', delay: 300, },
+  { id: 7, title: 'Panduan Analisis Teknikal: Pola Candlestick', category: 'Analisis', imageUrl: 'https://source.unsplash.com/600x400/?candlestick,chart', link: '#', delay: 100, },
+  { id: 8, title: 'Menyusun Rencana Investasi Jangka Panjang', category: 'Tips & Trik', imageUrl: 'https://source.unsplash.com/600x400/?plan,future', link: '#', delay: 200, },
+])
 
-// Kategori Filter (Bisa dibuat dinamis dari DB nanti, sekarang statis dulu)
 const categories = ref([
   'Semua',
   'Dasar Investasi',
   'Analisis',
   'Tips & Trik',
-  'Berita Terkini'
 ])
 
 const selectedCategory = ref('Semua')
 
-// --- FETCH DATA DARI BACKEND ---
-const fetchArticles = async () => {
-  try {
-    isLoading.value = true
-    const response = await api.get('/articles')
-    
-    // Mapping data dari backend agar sesuai dengan properti yang dibutuhkan ArticleCard
-    // Backend mengembalikan array objek Article (id, title, content, imageUrl, category, createdAt)
-    allArticles.value = response.data.map(article => ({
-      id: article.id,
-      title: article.title,
-      category: article.category,
-      imageUrl: article.imageUrl || 'https://placehold.co/600x400?text=No+Image', // Fallback image
-      link: `/artikel/${article.id}`, // Link detail (nanti kita buat view-nya)
-      delay: 100, // Animasi delay (bisa di-randomize kalau mau)
-      createdAt: article.createdAt // Opsional: untuk sorting atau display tanggal
-    }))
-  } catch (err) {
-    console.error('Gagal mengambil artikel:', err)
-    error.value = 'Gagal memuat artikel. Silakan coba lagi nanti.'
-  } finally {
-    // Beri sedikit delay agar skeleton tidak kedip terlalu cepat (estetika)
-    setTimeout(() => {
-      isLoading.value = false
-    }, 500)
-  }
-}
-
-// Logika filter di sisi Frontend
+// Logika filter
 const filteredArticles = computed(() => {
   if (selectedCategory.value === 'Semua') {
     return allArticles.value
   }
   return allArticles.value.filter(article => {
-    // Case insensitive comparison untuk keamanan
-    return article.category.toLowerCase() === selectedCategory.value.toLowerCase()
+    return article.category === selectedCategory.value
   })
-})
-
-// Ambil data saat komponen di-mount
-onMounted(() => {
-  fetchArticles()
 })
 </script>
 
@@ -84,7 +53,7 @@ onMounted(() => {
           :enter="{ opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, delay: 300 } }"
           class="mt-4 text-xl text-gibei-text max-w-2xl mx-auto"
         >
-          Pusat materi edukasi GIBEI UNIMED yang tersusun rapi.
+          Pusat materi edukasi GIBEI UNIMED yang tersusun rapi (WDD 5.0).
         </p>
       </div>
     </section>
@@ -115,19 +84,8 @@ onMounted(() => {
           </button>
         </div>
 
-        <!-- Loading State (Skeleton) -->
-        <div v-if="isLoading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <ArticleCardSkeleton v-for="n in 6" :key="n" />
-        </div>
-
-        <!-- Error State -->
-        <div v-else-if="error" class="text-center py-16 text-red-500 font-inter">
-          {{ error }}
-          <button @click="fetchArticles" class="block mx-auto mt-4 text-gibei-primary underline">Coba Lagi</button>
-        </div>
-
         <!-- Grid untuk Kartu Artikel -->
-        <div v-else-if="filteredArticles.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <ArticleCard 
             v-for="article in filteredArticles" 
             :key="article.id" 
@@ -137,7 +95,7 @@ onMounted(() => {
         
         <!-- Tampilan jika tidak ada hasil -->
         <div 
-          v-else 
+          v-if="filteredArticles.length === 0" 
           class="text-center py-16"
           v-motion
           :initial="{ opacity: 0 }"
@@ -147,7 +105,7 @@ onMounted(() => {
             Artikel tidak ditemukan
           </h3>
           <p class="font-inter text-gibei-text mt-2">
-            Belum ada artikel dalam kategori '{{ selectedCategory }}'.
+            Tidak ada artikel dalam kategori '{{ selectedCategory }}' saat ini.
           </p>
         </div>
         

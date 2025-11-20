@@ -42,7 +42,9 @@ onMounted(async () => {
     // Kita ambil daftar SPM yang tersedia
     const response = await api.get('/spm')
     
-    // Logika sederhana: Ambil SPM yang paling baru (index pertama)
+    // Logika sederhana: Ambil SPM yang paling baru (index terakhir atau pertama tergantung sort BE)
+    // Di backend kita sort asc (terlama), jadi kita ambil yang paling relevan atau kita cari yg kuota > 0
+    // Di sini kita ambil element pertama sebagai contoh "Active Batch"
     if (response.data && response.data.length > 0) {
       activeSpm.value = response.data[0] 
     }
@@ -51,6 +53,12 @@ onMounted(async () => {
     console.error("Gagal load SPM:", error)
   } finally {
     isLoadingPage.value = false
+  }
+
+  // Jika user sudah login, kita tidak perlu isi formData.name/email
+  // karena nanti di Template kita ambil langsung dari `currentUser`
+  if (isLoggedIn.value && currentUser.value) {
+    // console.log('User:', currentUser.value)
   }
 })
 
@@ -67,27 +75,21 @@ watch(() => formData.value.origin, (val) => {
 
 // --- 3. Submit Pendaftaran ---
 const handleSubmit = async () => {
-  if (!activeSpm.value) {
-    alert('Jadwal SPM tidak ditemukan/belum dimuat.')
-    return
-  }
+  if (!activeSpm.value) return
 
   isSubmitting.value = true
   errorMessage.value = ''
 
   try {
-    // Payload ke Backend (Data body)
+    // Payload ke Backend
     const payload = {
-      // spmId tidak wajib di body karena sudah ada di URL, tapi dikirim juga tidak apa-apa
-      spmId: activeSpm.value.id, 
+      spmId: activeSpm.value.id, // ID dari SPM yang sedang aktif
       nim: formData.value.nim,
       origin: formData.value.origin,
       phone: formData.value.phone
     }
 
-    // FIX: Menggunakan URL Param sesuai permintaan
-    // /registrations/spm/:id
-    await api.post(`/registrations/spm/${activeSpm.value.id}`, payload)
+    await api.post('/registrations/spm', payload)
 
     isSuccess.value = true
     // Scroll ke atas agar pesan sukses terlihat
