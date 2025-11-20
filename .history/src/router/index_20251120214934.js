@@ -33,11 +33,6 @@ const routes = [
     // Nanti kita bisa tambahkan 'meta: { requiresAuth: true }'
     // jika sudah ada sistem login backend
   },
-  { 
-    path: '/admin', 
-    name: 'AdminDashboard', 
-    component: AdminDashboard 
-  },
 ]
 
 const router = createRouter({

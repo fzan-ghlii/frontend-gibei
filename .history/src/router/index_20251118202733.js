@@ -9,8 +9,6 @@ import Contact from '../views/Contact.vue'
 import Login from '../views/Login.vue'
 // UPGRADE 3: Impor Halaman Dashboard baru
 import Dashboard from '../views/Dashboard.vue'
-import AdminDashboard from '../views/AdminDashboard.vue'
-
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -32,11 +30,6 @@ const routes = [
     component: Dashboard,
     // Nanti kita bisa tambahkan 'meta: { requiresAuth: true }'
     // jika sudah ada sistem login backend
-  },
-  { 
-    path: '/admin', 
-    name: 'AdminDashboard', 
-    component: AdminDashboard 
   },
 ]
 
